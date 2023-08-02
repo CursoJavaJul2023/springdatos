@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,6 +33,14 @@ import cursojava.jpahibernate.orm.modelobanco.dto.DatosInforme;
 					") as resumen",
 			resultClass = DatosInforme.class
 		)		
+	}
+)
+@NamedQueries(
+	{
+		@NamedQuery(
+			name = "Cuenta.leerTodasLasCuentas",
+			query = "select cta from Cuenta cta"
+		)
 	}
 )
 public class Cuenta {
