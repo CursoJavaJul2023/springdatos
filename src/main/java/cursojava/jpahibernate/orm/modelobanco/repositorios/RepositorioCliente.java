@@ -19,5 +19,8 @@ public interface RepositorioCliente {
 
 	@Transactional(readOnly = true)
 	List<Cliente> buscarTodos() throws NegocioException;
+	
+	@Transactional(readOnly = true)
+	List<Cliente> cargarTodosConCuentasAsignadas() throws NegocioException;
 
 }

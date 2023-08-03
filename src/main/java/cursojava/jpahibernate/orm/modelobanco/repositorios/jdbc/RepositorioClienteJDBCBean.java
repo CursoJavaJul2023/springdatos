@@ -120,6 +120,12 @@ public class RepositorioClienteJDBCBean implements RepositorioCliente {
 		}
 		
 	}
+
+	@Override
+	public List<Cliente> cargarTodosConCuentasAsignadas() throws NegocioException {
+		
+		throw new NegocioException("Método sin implementar");
+	}
 	
 	
 

@@ -85,6 +85,21 @@ public class RepositorioClienteJPABean implements RepositorioCliente {
 		}
 	}
 
+	@Override
+	public List<Cliente> cargarTodosConCuentasAsignadas() throws NegocioException {
+		
+		try {
+			
+			return em.createNamedQuery("Cliente.leerTodosLosClientesConCuentas", Cliente.class).getResultList();
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			
+			throw new NegocioException("No se pudo consultar clientes", e);
+		}
+	}
+
 }
 
 

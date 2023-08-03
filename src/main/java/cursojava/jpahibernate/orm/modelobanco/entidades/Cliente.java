@@ -42,6 +42,10 @@ import javax.persistence.TemporalType;
 		@NamedQuery(
 			name = "Cliente.leerTodosLosClientes",
 			query = "select cte from Cliente cte"
+		),
+		@NamedQuery(
+			name = "Cliente.leerTodosLosClientesConCuentas",
+			query = "select cte from Cliente cte left outer join fetch cte.cuentas cta"
 		)		
 	}
 )
