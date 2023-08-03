@@ -2,6 +2,7 @@ package cursojava.jpahibernate.datos.ejemplos;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.context.ApplicationContext;
@@ -36,7 +37,32 @@ public class EmpleoDesdeJPA {
 			
 			System.out.println("---------------------------------------");			
 			
-			repoClientes.findByNombreLikeAndApellidosLikeOrderByNifDesc("%1", "%2")
+			repoClientes.findByNombreLikeAndApellidosLikeOrderByNifDesc("%1", "%1")
+				.forEach(System.out::println);
+			
+			System.out.println("---------------------------------------");			
+
+			repoClientes.buscarClientesPorFechaNacimiento(LocalDate.of(1980, 1, 10))
+				.forEach(System.out::println);
+			
+			System.out.println("---------------------------------------");	
+			
+			repoClientes.buscarClientesPorFechaNacimientoEnIntervalo(LocalDate.of(1980, 1, 1), LocalDate.of(1980, 1, 31))
+				.forEach(System.out::println);
+			
+			System.out.println("---------------------------------------");	
+			
+			repoClientes.buscarPorCompraEntreFechas(LocalDate.of(1980, 1, 1), LocalDate.of(1980, 1, 31))
+				.forEach(System.out::println);
+			
+			System.out.println("---------------------------------------");	
+
+			repoClientes.porArticuloComprado("NINGUNO")
+				.forEach(System.out::println);
+			
+			System.out.println("---------------------------------------");	
+
+			repoClientes.porAltaEnElDiaActual()
 				.forEach(System.out::println);
 			
 		} catch (Exception e) {
