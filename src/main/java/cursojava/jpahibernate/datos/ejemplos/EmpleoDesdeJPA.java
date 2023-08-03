@@ -14,8 +14,10 @@ import cursojava.jpahibernate.orm.modelobanco.entidades.CuentaPk;
 import cursojava.jpahibernate.orm.modelobanco.repositorios.RepositorioCliente;
 import cursojava.jpahibernate.orm.modelobanco.repositorios.jdbc.NegocioException;
 import cursojava.jpahibernate.orm.modelobanco.servicios.ServicioOperacionesModeloBanco;
+import cursojava.jpahibernate.orm.modelocompras.entidades.Articulo;
 import cursojava.jpahibernate.orm.modelocompras.entidades.ClienteCompras;
 import cursojava.jpahibernate.orm.modelocompras.repositorios.RepositorioClientesCompras;
+import cursojava.jpahibernate.orm.modelocompras.servicios.ServiciosModeloCompras;
 
 public class EmpleoDesdeJPA {
 	
@@ -30,44 +32,56 @@ public class EmpleoDesdeJPA {
 			
 			// probarServicioOperacionesBanco(ctx);
 			
-			RepositorioClientesCompras repoClientes = ctx.getBean(RepositorioClientesCompras.class);
+			// probarConsultasSpringDataJPA(ctx);
 			
-			Optional<ClienteCompras> opCliente = repoClientes.findByNif("00000001B");
-			opCliente.ifPresent(System.out::println);
+			ServiciosModeloCompras servicioCompras = ctx.getBean(ServiciosModeloCompras.class);
 			
-			System.out.println("---------------------------------------");			
-			
-			repoClientes.findByNombreLikeAndApellidosLikeOrderByNifDesc("%1", "%1")
-				.forEach(System.out::println);
-			
-			System.out.println("---------------------------------------");			
-
-			repoClientes.buscarClientesPorFechaNacimiento(LocalDate.of(1980, 1, 10))
-				.forEach(System.out::println);
-			
-			System.out.println("---------------------------------------");	
-			
-			repoClientes.buscarClientesPorFechaNacimientoEnIntervalo(LocalDate.of(1980, 1, 1), LocalDate.of(1980, 1, 31))
-				.forEach(System.out::println);
-			
-			System.out.println("---------------------------------------");	
-			
-			repoClientes.buscarPorCompraEntreFechas(LocalDate.of(1980, 1, 1), LocalDate.of(1980, 1, 31))
-				.forEach(System.out::println);
-			
-			System.out.println("---------------------------------------");	
-
-			repoClientes.porArticuloComprado("NINGUNO")
-				.forEach(System.out::println);
-			
-			System.out.println("---------------------------------------");	
-
-			repoClientes.porAltaEnElDiaActual()
-				.forEach(System.out::println);
+			servicioCompras.efectuarCompra(
+				"00000001B",
+				new String[] { "ART000001", "ART000002", "ART000003" },
+				new Integer[] { 4, 4, 4 }
+			);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static void probarConsultasSpringDataJPA(ApplicationContext ctx) {
+		RepositorioClientesCompras repoClientes = ctx.getBean(RepositorioClientesCompras.class);
+		
+		Optional<ClienteCompras> opCliente = repoClientes.findByNif("00000001B");
+		opCliente.ifPresent(System.out::println);
+		
+		System.out.println("---------------------------------------");			
+		
+		repoClientes.findByNombreLikeAndApellidosLikeOrderByNifDesc("%1", "%1")
+			.forEach(System.out::println);
+		
+		System.out.println("---------------------------------------");			
+
+		repoClientes.buscarClientesPorFechaNacimiento(LocalDate.of(1980, 1, 10))
+			.forEach(System.out::println);
+		
+		System.out.println("---------------------------------------");	
+		
+		repoClientes.buscarClientesPorFechaNacimientoEnIntervalo(LocalDate.of(1980, 1, 1), LocalDate.of(1980, 1, 31))
+			.forEach(System.out::println);
+		
+		System.out.println("---------------------------------------");	
+		
+		repoClientes.buscarPorCompraEntreFechas(LocalDate.of(1980, 1, 1), LocalDate.of(1980, 1, 31))
+			.forEach(System.out::println);
+		
+		System.out.println("---------------------------------------");	
+
+		repoClientes.porArticuloComprado("NINGUNO")
+			.forEach(System.out::println);
+		
+		System.out.println("---------------------------------------");	
+
+		repoClientes.porAltaEnElDiaActual()
+			.forEach(System.out::println);
 	}
 
 	private static void probarServicioOperacionesBanco(ApplicationContext ctx) {

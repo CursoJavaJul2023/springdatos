@@ -22,7 +22,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(
 	basePackages = {
 		"cursojava.jpahibernate.orm.modelobanco.repositorios.jpa",
-		"cursojava.jpahibernate.orm.modelobanco.servicios.impl"
+		"cursojava.jpahibernate.orm.modelobanco.servicios.impl",
+		"cursojava.jpahibernate.orm.modelocompras.servicios.impl"
 	}
 )
 @EnableJpaRepositories(
